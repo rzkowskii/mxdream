@@ -8,3 +8,4 @@
 /build-*/src/*.o
 /build-*/src/*.dylib
 /build-*/src/lxdream
+.claude/
