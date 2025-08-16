@@ -1,0 +1,44 @@
+macOS (Apple Silicon) quickstart via Rosetta 2 (x86_64)
+======================================================
+
+Prereqs (Intel Homebrew under Rosetta):
+
+1) Start a Rosetta shell
+
+   arch -x86_64 /bin/zsh
+
+2) Install required libraries (Intel Homebrew at /usr/local)
+
+   arch -x86_64 /usr/local/bin/brew install glib libpng libisofs gettext pkg-config
+
+Build:
+
+   export CC=clang OBJC=clang
+   export CFLAGS="-arch x86_64 -O3"
+   export CXXFLAGS="-arch x86_64 -O3"
+   export OBJCFLAGS="-arch x86_64 -O3"
+   export LDFLAGS="-arch x86_64"
+   export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+
+   ./configure --enable-optimized --with-gtk=no
+   # Avoid races in generated sources during parallel build
+   make -j1
+
+Optional (recommended for Cocoa UI resources):
+
+   make bundle
+
+Run:
+
+   # Launch the GUI normally (recommended)
+   ./src/lxdream [/path/to/game.gdi|.cdi|.nrg|.dst]
+
+   # Or launch from the bundle
+   ./lxdream.app/Contents/MacOS/lxdream [/path/to/game or .dst]
+
+ Notes:
+  - Use -c <config-file> to point to a specific config; BIOS/flash paths are set in config.
+  - Video/Audio use Cocoa NSOpenGL and CoreAudio automatically on macOS. Use -V only when explicitly selecting a driver (e.g., "-V nsgl" or "-V null").
+  - No SDL2/GTK3/OpenAL required for the Cocoa build.
+
+

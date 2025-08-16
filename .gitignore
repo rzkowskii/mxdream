@@ -1,0 +1,10 @@
+*.dmg
+*.app.zip
+/build-*/dmg-staging/
+/build-*/dmg*/
+/build-*/lxdream.app/Contents/_CodeSignature/
+/build-*/lxdream.app/Contents/Frameworks/*.dylib
+/autom4te.cache/
+/build-*/src/*.o
+/build-*/src/*.dylib
+/build-*/src/lxdream
